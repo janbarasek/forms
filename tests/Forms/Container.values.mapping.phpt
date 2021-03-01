@@ -15,8 +15,7 @@ class FormData
 	/** @var string */
 	public $title;
 
-	/** @var FormFirstLevel */
-	public $first;
+	public FormFirstLevel $first;
 }
 
 
@@ -117,7 +116,7 @@ test('submitted form + getValues()', function () {
 	Assert::truthy($form->isSubmitted());
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'sent title',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => '',
 			'age' => 999,
 			'second' => ArrayHash::from([
@@ -141,7 +140,7 @@ test('submitted form + reset()', function () {
 	Assert::false($form->isSubmitted());
 	Assert::equal(hydrate(FormData::class, [
 		'title' => '',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => '',
 			'age' => null,
 			'second' => ArrayHash::from([
@@ -170,7 +169,7 @@ test('setValues() + object', function () {
 
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'new1',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => 'new2',
 			'age' => null,
 			'second' => ArrayHash::from([
@@ -189,7 +188,7 @@ test('setValues() + object', function () {
 
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'new1',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => 'new2',
 			'age' => null,
 			'second' => ArrayHash::from([
@@ -214,7 +213,7 @@ test('getValues(...arguments...)', function () {
 
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'new1',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => 'new2',
 			'age' => null,
 			'second' => ArrayHash::from([
@@ -286,7 +285,7 @@ test('onSuccess test', function () {
 	$form->onSuccess[] = function (Form $form, $values) {
 		Assert::equal(hydrate(FormData::class, [
 			'title' => 'sent title',
-			'first' => ArrayHash::from([
+			'first' => hydrate(FormFirstLevel::class, [
 				'name' => '',
 				'age' => 999,
 				'second' => ArrayHash::from([
@@ -299,7 +298,7 @@ test('onSuccess test', function () {
 	$form->onSuccess[] = function (Form $form, FormData $values) {
 		Assert::equal(hydrate(FormData::class, [
 			'title' => 'sent title',
-			'first' => ArrayHash::from([
+			'first' => hydrate(FormFirstLevel::class, [
 				'name' => '',
 				'age' => 999,
 				'second' => ArrayHash::from([
@@ -327,7 +326,7 @@ test('getValues() + object', function () {
 
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'sent title',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'name' => '',
 			'age' => 999,
 			'second' => ArrayHash::from([
@@ -350,7 +349,7 @@ test('submitted form + setValidationScope() + getValues(true)', function () {
 	Assert::truthy($form->isSubmitted());
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'sent title',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'age' => 999,
 			'second' => ArrayHash::from([]),
 		]),
@@ -368,7 +367,7 @@ test('submitted form + setValidationScope() + getValues(true)', function () {
 	Assert::truthy($form->isSubmitted());
 	Assert::equal(hydrate(FormData::class, [
 		'title' => 'sent title',
-		'first' => ArrayHash::from([
+		'first' => hydrate(FormFirstLevel::class, [
 			'second' => ArrayHash::from([
 				'city' => 'sent city',
 			]),
