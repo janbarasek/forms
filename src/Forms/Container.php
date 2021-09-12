@@ -105,9 +105,10 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 
 	/**
 	 * Returns the values submitted by the form.
-	 * @param  string|object|null  $returnType  'array' for array
+	 * @template T
+	 * @param  class-string<T>|T|null  $returnType  'array' for array
 	 * @param  Control[]|null  $controls
-	 * @return object|array
+	 * @return T|array
 	 */
 	public function getValues($returnType = null, array $controls = null)
 	{
@@ -130,9 +131,10 @@ class Container extends Nette\ComponentModel\Container implements \ArrayAccess
 
 	/**
 	 * Returns the potentially unvalidated values submitted by the form.
-	 * @param  string|object|null  $returnType  'array' for array
+	 * @template T
+	 * @param  class-string<T>|T|null  $returnType  'array' for array
 	 * @param  Control[]|null  $controls
-	 * @return object|array
+	 * @return T|array
 	 */
 	public function getUnsafeValues($returnType, array $controls = null)
 	{
