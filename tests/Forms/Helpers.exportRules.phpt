@@ -101,6 +101,6 @@ test('addFilter', function () {
 	$input->setRequired(false);
 	$input->addRule(Form::Email);
 	Assert::same([
-		['op' => ':pattern', 'msg' => 'match pattern', 'arg' => '\\d+'],
+		['op' => ':pattern', 'msg' => 'match pattern', 'arg' => '\d+'],
 	], Helpers::exportRules($input->getRules()));
 });
